@@ -56,8 +56,6 @@ for (year, month), group in gpus_top_ten.groupby([gpus_top_ten.index.year, gpus_
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
 
-    break
-
 
 # CPU Speed Graphs
 cpus = pd.read_csv('data/cpus.csv', parse_dates=['date'])
@@ -81,7 +79,6 @@ for (year, month), group in cpus.groupby([cpus.index.year, cpus.index.month]):
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
 
-    break
 
 
 
@@ -106,8 +103,6 @@ for (year, month), group in display_res.groupby([display_res.index.year, display
     plot_title = f'Percentage for {year}-{month:02d}'
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
-
-    break
 
 
 
@@ -134,7 +129,6 @@ for (year, month), group in hd.groupby([hd.index.year, hd.index.month]):
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
 
-    break
 
 
 
@@ -163,7 +157,6 @@ for (year, month), group in physical_cpus.groupby([physical_cpus.index.year, phy
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
 
-    break
 
 
 # RAM Graphs
@@ -188,7 +181,6 @@ for (year, month), group in ram.groupby([ram.index.year, ram.index.month]):
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
 
-    break
 
 
 
@@ -213,5 +205,3 @@ for (year, month), group in vram.groupby([vram.index.year, vram.index.month]):
     plot_title = f'Percentage for {year}-{month:02d}'
     filename = f'percentage{year}-{month:02d}.png'
     plot_and_save(monthdata, 'percentage', plot_title, filename, directory)
-
-    break
