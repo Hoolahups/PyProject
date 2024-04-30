@@ -39,3 +39,5 @@ function updateSelectors() {
     } else {
         yearSelector.style.display = 'block';
         monthSelector.style.display = 'block';
+    }
+}
