@@ -1,7 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualizer</title>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <h1>Data Visualizer</h1>
+    <label for="folder">Choose a data category:</label>
+    <select id="folder" onchange="updateImage()">
+        <option value="cpus">CPUs</option>
+        <option value="display_res">Display Resolutions</option>
+        <option value="gpus">GPUs</option>
+        <option value="hd">Hard Drives</option>
+        <option value="physical_cpus">Physical CPUs</option>
+        <option value="ram">RAM</option>
+        <option value="vram">VRAM</option>
+    </select>
+
+    <label for="type">Choose a type:</label>
+    <select id="type" onchange="updateImage()">
+        <option value="change">Change</option>
+        <option value="percentage">Percentage</option>
+    </select>
+
+    <label for="year">Year:</label>
+    <select id="year" onchange="updateImage()">
+        <!-- Populate years dynamically or list them manually -->
+        <script>
+            for (let year = 2008; year <= 2023; year++) {
+                document.write(`<option value="${year}">${year}</option>`);
+            }
+        </script>
+    </select>
+
+    <label for="month">Month:</label>
+    <select id="month" onchange="updateImage()">
+        <!-- Populate months -->
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+
+    <div>
+        <img id="imageDisplay" src="" alt="Selected Image" style="width:300px; height:auto; display:none;"/>
+        <p id="errorMessage" style="color:red;"></p>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
