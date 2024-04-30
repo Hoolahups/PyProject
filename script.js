@@ -7,6 +7,7 @@ function updateImage() {
     var imagePath = 'graphs/' + folder + '/' + type + year + '-' + month + '.png';
 
     var img = new Image();
+    console.log(imagePath);
     img.src = imagePath;
     img.onload = function() {
         document.getElementById('imageDisplay').style.display = 'block';
