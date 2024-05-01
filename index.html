@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Visualizer</title>
+    <title>Steam Hardware Survey Data Visualizer</title>
 </head>
 <body>
-    <h1>Data Visualizer</h1>
+    <h1>Steam Hardware Survey Data Visualizer</h1>
     <table cellpadding="3">
         <tr>
             <td>
-                <label for="folder">Choose a data category:</label>
+                <label for="folder">Choose a component:</label>
                 <select id="folder" onchange="updateSelectors(); updateImage();">
                     <option value="cpus">CPUs</option>
                     <option value="display_res">Display Resolutions</option>
@@ -21,7 +21,7 @@
                     <option value="vram">VRAM</option>
                 </select>
 
-                <label for="type">Choose a type:</label>
+                <label for="type">Choose a graph type:</label>
                 <select id="type" onchange="updateSelectors(); updateImage();">
                     <option value="change">Change</option>
                     <option value="percentage">Percentage</option>
