@@ -30,14 +30,26 @@ function loadLineNames() {
         .then(text => {
             var names = text.split('\n');
             var dataList = document.getElementById('nameOptions');
-            dataList.innerHTML = '';
-            names.forEach(name => {
-                var option = document.createElement('option');
-                option.value = name;
-                dataList.appendChild(option);
+            dataList.innerHTML = ''; // Clear previous options
+            names.forEach(function(name) {
+                if (name) { // Ensure non-empty names are added
+                    var option = document.createElement('option');
+                    option.value = name;
+                    dataList.appendChild(option);
+                }
             });
+        }).catch(error => {
+            console.error('Error loading the name list:', error);
         });
 }
+
+
+if (type === 'line') {
+    console.log("Loading line names...");
+    lineNameContainer.style.display = 'block';
+    loadLineNames(); // Load names for autocomplete when 'Line' type is selected
+}
+
 
 function updateImage() {
     var folder = document.getElementById('folder').value;
