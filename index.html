@@ -21,13 +21,21 @@
                     <option value="vram">VRAM</option>
                 </select>
             
-                <label for="type">Choose a type:</label>
-                <select id="type" onchange="updateImage()">
+                <select id="type" onchange="updateSelectors(); updateImage();">
                     <option value="change">Change</option>
                     <option value="percentage">Percentage</option>
                     <option value="gif">GIF</option>
+                    <option value="line">Line</option>
                 </select>
-            
+                
+                <div id="lineNameContainer" style="display: none;">
+                    <label for="lineNameInput">Enter Name:</label>
+                    <input type="text" id="lineNameInput" oninput="filterNames()" list="nameOptions">
+                    <datalist id="nameOptions">
+                        <!-- Options will be populated dynamically via JavaScript -->
+                    </datalist>
+                </div>
+
                 <label for="year">Year:</label>
                 <select id="year" onchange="updateImage()">
                     <!-- Populate years dynamically or list them manually -->
