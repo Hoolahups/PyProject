@@ -29,16 +29,15 @@
                     <option value="line">Line</option>
                 </select>
 
+                <!-- Autocomplete input for Line graphs -->
                 <div id="lineNameContainer" style="display: none;">
                     <label for="lineNameInput">Enter Name:</label>
-                    <input type="text" id="lineNameInput" list="nameOptions">
+                    <input type="text" id="lineNameInput" oninput="updateImage()" list="nameOptions">
                     <datalist id="nameOptions">
-                        <option value="GPU GTX 1080">
-                        <option value="GPU GTX 1070">
-                        <option value="GPU GTX 1060">
+                        <!-- Options will be populated dynamically via JavaScript -->
                     </datalist>
                 </div>
-
+                    
                 
                 <!-- Separate container for Year and Month selectors -->
                 <div id="dateSelectors" style="display: none;">

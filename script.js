@@ -28,20 +28,20 @@ function loadLineNames() {
     fetch(namesPath)
         .then(response => response.text())
         .then(text => {
-            var names = text.split('\n');
+            var names = text.split('\n').filter(Boolean); // Ensure only non-empty names are included
+            console.log("Loaded names:", names); // Check what names are loaded
             var dataList = document.getElementById('nameOptions');
             dataList.innerHTML = ''; // Clear previous options
-            names.forEach(function(name) {
-                if (name) { // Ensure non-empty names are added
-                    var option = document.createElement('option');
-                    option.value = name;
-                    dataList.appendChild(option);
-                }
+            names.forEach(name => {
+                var option = document.createElement('option');
+                option.value = name.trim(); // Trim names to avoid whitespace issues
+                dataList.appendChild(option);
             });
         }).catch(error => {
-            console.error('Error loading the name list:', error);
+            console.error('Failed to load names:', error);
         });
 }
+
 
 
 
