@@ -1,0 +1,8 @@
+10 GB to  99 GB
+100 GB to 249 GB
+250 GB to 499 GB
+500 GB to 749 GB
+750 GB to 999 GB
+Above 1 TB
+Less than 10 GB
+Unspecified

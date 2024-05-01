@@ -1,7 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
-    updateSelectors(); // Call on initial load
-    updateImage(); // Call to set initial image or GIF
+    updateSelectors(); // Call on initial load to set up the correct UI elements
+    updateImage(); // Set initial image or GIF based on default selections
 });
+
+function updateSelectors() {
+    var type = document.getElementById('type').value;
+    var yearSelector = document.getElementById('year').parentNode;
+    var monthSelector = document.getElementById('month').parentNode;
+    var lineNameContainer = document.getElementById('lineNameContainer');
+
+    if (type === 'gif') {
+        yearSelector.style.display = 'none';
+        monthSelector.style.display = 'none';
+        lineNameContainer.style.display = 'none';
+    } else if (type === 'line') {
+        yearSelector.style.display = 'none';
+        monthSelector.style.display = 'none';
+        lineNameContainer.style.display = 'block';
+        loadLineNames();  // Function to load names into the datalist
+    } else {
+        yearSelector.style.display = 'block';
+        monthSelector.style.display = 'block';
+        lineNameContainer.style.display = 'none';
+    }
+}
+
+function loadLineNames() {
+    var folder = document.getElementById('folder').value;
+    var namesPath = 'graphs/' + folder + '_name.txt';
+    fetch(namesPath)
+        .then(response => response.text())
+        .then(text => {
+            var names = text.split('\n');
+            var dataList = document.getElementById('nameOptions');
+            dataList.innerHTML = '';
+            names.forEach(name => {
+                var option = document.createElement('option');
+                option.value = name;
+                dataList.appendChild(option);
+            });
+        });
+}
 
 function updateImage() {
     var folder = document.getElementById('folder').value;
@@ -9,6 +48,9 @@ function updateImage() {
 
     if (type === 'gif') {
         var imagePath = 'gifs/' + folder + '.gif';
+    } else if (type === 'line') {
+        var name = document.getElementById('lineNameInput').value;
+        var imagePath = 'graphs/' + folder + '/line_' + name.replace(/ /g, '_').replace(/\//g, '-') + '.png';
     } else {
         var year = document.getElementById('year').value;
         var month = document.getElementById('month').value;
@@ -16,20 +58,6 @@ function updateImage() {
     }
 
     displayImage(imagePath);
-}
-
-function updateSelectors() {
-    var type = document.getElementById('type').value;
-    var yearSelector = document.getElementById('year').parentNode; // Get parent element for label and select
-    var monthSelector = document.getElementById('month').parentNode; // Get parent element for label and select
-    
-    if (type === 'gif') {
-        yearSelector.style.display = 'none';
-        monthSelector.style.display = 'none';
-    } else {
-        yearSelector.style.display = 'block';
-        monthSelector.style.display = 'block';
-    }
 }
 
 function displayImage(imagePath) {
@@ -45,13 +73,13 @@ function displayImage(imagePath) {
     img.src = imagePath; // This actually triggers the loading
 }
 
-// Update selectors when the 'type' changes
 document.getElementById('type').addEventListener('change', function() {
     updateSelectors();
     updateImage();
 });
-
-// Similarly, call updateImage when other selectors change
-document.getElementById('folder').addEventListener('change', updateImage);
+document.getElementById('folder').addEventListener('change', function() {
+    updateSelectors(); // Update UI elements based on new folder selection
+    updateImage();
+});
 document.getElementById('year').addEventListener('change', updateImage);
 document.getElementById('month').addEventListener('change', updateImage);

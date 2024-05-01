@@ -1,0 +1,11 @@
+graphs/cpus/line_1.4_Ghz_to_1.49_Ghz.png
+graphs/cpus/line_1.5_Ghz_to_1.69_Ghz.png
+graphs/cpus/line_1.7_Ghz_to_1.99_Ghz.png
+graphs/cpus/line_2.0_Ghz_to_2.29_Ghz.png
+graphs/cpus/line_2.3_Ghz_to_2.69_Ghz.png
+graphs/cpus/line_2.7_Ghz_to_2.99_Ghz.png
+graphs/cpus/line_3.0_Ghz_to_3.29_Ghz.png
+graphs/cpus/line_3.3_Ghz_to_3.69_Ghz.png
+graphs/cpus/line_3.7_Ghz_and_above.png
+graphs/cpus/line_Below_1.4_Ghz.png
+graphs/cpus/line_Unspecified.png
