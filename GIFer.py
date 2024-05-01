@@ -12,7 +12,7 @@ os.chdir(script_directory)
 categories = ['cpus', 'display_res', 'gpus', 'hd', 'physical_cpus', 'ram', 'vram']
 start_year = 2008
 end_year = 2023
-months_of_interest = ['01', '04', '07', '10']
+months_of_interest = ['01', '03', '05', '07', "09", "011"]
 base_path = "graphs/{}/file"
 
 # Process each category
@@ -32,4 +32,4 @@ for category in categories:
     # Save as GIF (assuming all images are of the same size)
     if images:
         gif_path = f"gifs/{category}.gif"
-        images[0].save(gif_path, save_all=True, append_images=images[1:], optimize=False, duration=300, loop=0)
+        images[0].save(gif_path, save_all=True, append_images=images[1:], optimize=False, duration=666, loop=0)
