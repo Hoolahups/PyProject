@@ -44,11 +44,6 @@ function loadLineNames() {
 }
 
 
-if (type === 'line') {
-    console.log("Loading line names...");
-    lineNameContainer.style.display = 'block';
-    loadLineNames(); // Load names for autocomplete when 'Line' type is selected
-}
 
 
 function updateImage() {
@@ -92,3 +87,16 @@ document.getElementById('folder').addEventListener('change', function() {
 });
 document.getElementById('year').addEventListener('change', updateImage);
 document.getElementById('month').addEventListener('change', updateImage);
+
+document.getElementById('lineNameInput').addEventListener('input', function(e) {
+    let inputVal = e.target.value.toLowerCase();
+    let filteredNames = names.filter(name => name.toLowerCase().includes(inputVal));
+    
+    let dataList = document.getElementById('nameOptions');
+    dataList.innerHTML = ''; // Clear previous options
+    filteredNames.forEach(function(name) {
+        var option = document.createElement('option');
+        option.value = name;
+        dataList.appendChild(option);
+    });
+});
