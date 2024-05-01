@@ -9,7 +9,7 @@ function updateSelectors() {
     var monthSelector = document.getElementById('month').parentNode; // Get parent element for label and select
     var lineNameContainer = document.getElementById('lineNameContainer'); // Get the autocomplete container
 
-    // Initially hide all specific selectors
+    // Initially hide specific selectors that may not be needed
     yearSelector.style.display = 'none';
     monthSelector.style.display = 'none';
     lineNameContainer.style.display = 'none';
@@ -26,6 +26,7 @@ function updateSelectors() {
         monthSelector.style.display = 'block';
     }
 }
+
 
 function loadLineNames() {
     var folder = document.getElementById('folder').value;
