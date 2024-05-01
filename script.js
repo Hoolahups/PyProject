@@ -5,23 +5,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateSelectors() {
     var type = document.getElementById('type').value;
-    var yearSelector = document.getElementById('year').parentNode;
-    var monthSelector = document.getElementById('month').parentNode;
-    var lineNameContainer = document.getElementById('lineNameContainer');
+    var yearSelector = document.getElementById('year').parentNode; // Get parent element for label and select
+    var monthSelector = document.getElementById('month').parentNode; // Get parent element for label and select
+    var lineNameContainer = document.getElementById('lineNameContainer'); // Get the autocomplete container
 
+    // Initially hide all specific selectors
+    yearSelector.style.display = 'none';
+    monthSelector.style.display = 'none';
+    lineNameContainer.style.display = 'none';
+
+    // Conditionally display the appropriate UI elements
     if (type === 'gif') {
-        yearSelector.style.display = 'none';
-        monthSelector.style.display = 'none';
-        lineNameContainer.style.display = 'none';
+        // GIF type does not require any additional selectors
     } else if (type === 'line') {
-        yearSelector.style.display = 'none';
-        monthSelector.style.display = 'none';
+        // Line type requires name input for autocomplete
         lineNameContainer.style.display = 'block';
-        loadLineNames();  // Function to load names into the datalist
     } else {
+        // Other types (change, percentage) require year and month selectors
         yearSelector.style.display = 'block';
         monthSelector.style.display = 'block';
-        lineNameContainer.style.display = 'none';
     }
 }
 
