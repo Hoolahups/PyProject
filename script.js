@@ -5,28 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateSelectors() {
     var type = document.getElementById('type').value;
-    var yearSelector = document.getElementById('year').parentNode; // Get parent element for label and select
-    var monthSelector = document.getElementById('month').parentNode; // Get parent element for label and select
-    var lineNameContainer = document.getElementById('lineNameContainer'); // Get the autocomplete container
+    var dateSelectors = document.getElementById('dateSelectors'); // New container for date selectors
+    var lineNameContainer = document.getElementById('lineNameContainer');
 
-    // Initially hide specific selectors that may not be needed
-    yearSelector.style.display = 'none';
-    monthSelector.style.display = 'none';
-    lineNameContainer.style.display = 'none';
+    dateSelectors.style.display = 'none'; // Hide date selectors by default
+    lineNameContainer.style.display = 'none'; // Hide line name input by default
 
-    // Conditionally display the appropriate UI elements
     if (type === 'gif') {
         // GIF type does not require any additional selectors
     } else if (type === 'line') {
         // Line type requires name input for autocomplete
         lineNameContainer.style.display = 'block';
     } else {
-        // Other types (change, percentage) require year and month selectors
-        yearSelector.style.display = 'block';
-        monthSelector.style.display = 'block';
+        // Change and Percentage types require date selectors
+        dateSelectors.style.display = 'block';
     }
 }
-
 
 function loadLineNames() {
     var folder = document.getElementById('folder').value;
