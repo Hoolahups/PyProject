@@ -1,23 +1,28 @@
+var names = []; // Global array to store names for autocomplete
+
 document.addEventListener('DOMContentLoaded', function() {
-    updateSelectors(); // Call on initial load to set up the correct UI elements
-    updateImage(); // Set initial image or GIF based on default selections
+    updateSelectors(); // Set up UI elements correctly based on initial type
+    updateImage(); // Load initial image based on default settings
 });
 
 function updateSelectors() {
     var type = document.getElementById('type').value;
-    var dateSelectors = document.getElementById('dateSelectors'); // New container for date selectors
-    var lineNameContainer = document.getElementById('lineNameContainer');
+    var dateSelectors = document.getElementById('dateSelectors'); // Container for date selectors
+    var lineNameContainer = document.getElementById('lineNameContainer'); // Container for line name input
 
-    dateSelectors.style.display = 'none'; // Hide date selectors by default
-    lineNameContainer.style.display = 'none'; // Hide line name input by default
+    // Initially hide date selectors and line name input
+    dateSelectors.style.display = 'none';
+    lineNameContainer.style.display = 'none';
 
+    // Display appropriate UI elements based on the type selected
     if (type === 'gif') {
-        // GIF type does not require any additional selectors
+        // No additional selectors needed for GIFs
     } else if (type === 'line') {
-        // Line type requires name input for autocomplete
+        // Show line name input for autocomplete
         lineNameContainer.style.display = 'block';
+        loadLineNames(); // Load names whenever 'line' type is selected
     } else {
-        // Change and Percentage types require date selectors
+        // Show date selectors for 'change' and 'percentage' types
         dateSelectors.style.display = 'block';
     }
 }
@@ -28,37 +33,43 @@ function loadLineNames() {
     fetch(namesPath)
         .then(response => response.text())
         .then(text => {
-            var names = text.split('\n').filter(Boolean); // Ensure only non-empty names are included
-            console.log("Loaded names:", names); // Check what names are loaded
-            var dataList = document.getElementById('nameOptions');
-            dataList.innerHTML = ''; // Clear previous options
-            names.forEach(name => {
-                var option = document.createElement('option');
-                option.value = name.trim(); // Trim names to avoid whitespace issues
-                dataList.appendChild(option);
-            });
+            names = text.split('\n').map(name => name.trim()).filter(Boolean);
+            updateDatalist(names);
         }).catch(error => {
             console.error('Failed to load names:', error);
         });
 }
 
+function updateDatalist(names) {
+    var dataList = document.getElementById('nameOptions');
+    dataList.innerHTML = ''; // Clear previous options
+    names.forEach(name => {
+        var option = document.createElement('option');
+        option.value = name;
+        dataList.appendChild(option);
+    });
+}
 
-
-
+document.getElementById('lineNameInput').addEventListener('input', function() {
+    var inputVal = this.value.toLowerCase();
+    var filteredNames = names.filter(name => name.toLowerCase().includes(inputVal));
+    updateDatalist(filteredNames);
+});
 
 function updateImage() {
     var folder = document.getElementById('folder').value;
     var type = document.getElementById('type').value;
 
+    var imagePath;
     if (type === 'gif') {
-        var imagePath = 'gifs/' + folder + '.gif';
+        imagePath = 'gifs/' + folder + '.gif';
     } else if (type === 'line') {
         var name = document.getElementById('lineNameInput').value;
-        var imagePath = 'graphs/' + folder + '/line_' + name.replace(/ /g, '_').replace(/\//g, '-') + '.png';
+        imagePath = 'graphs/' + folder + '/line_' + name.replace(/ /g, '_').replace(/\//g, '-') + '.png';
     } else {
         var year = document.getElementById('year').value;
         var month = document.getElementById('month').value;
-        var imagePath = 'graphs/' + folder + '/' + type + year + '-' + month + '.png';
+        imagePath = 'graphs/' + folder + '/' + type + year + '-' + month + '.png';
     }
 
     displayImage(imagePath);
@@ -74,9 +85,10 @@ function displayImage(imagePath) {
         img.style.display = 'none';
         document.getElementById('errorMessage').textContent = 'This image or GIF does not exist.';
     };
-    img.src = imagePath; // This actually triggers the loading
+    img.src = imagePath;
 }
 
+// Add event listeners to other elements
 document.getElementById('type').addEventListener('change', function() {
     updateSelectors();
     updateImage();
@@ -87,5 +99,3 @@ document.getElementById('folder').addEventListener('change', function() {
 });
 document.getElementById('year').addEventListener('change', updateImage);
 document.getElementById('month').addEventListener('change', updateImage);
-
-
